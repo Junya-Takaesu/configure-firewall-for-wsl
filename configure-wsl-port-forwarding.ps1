@@ -13,7 +13,7 @@ else {
 #[Ports]
 
 #All the ports you want to forward separated by coma
-$ports = @(80, 443);
+$ports = @(22);
 
 
 #[Static ip]
