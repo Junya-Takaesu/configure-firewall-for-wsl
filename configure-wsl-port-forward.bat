@@ -1,0 +1,1 @@
+sudo wsl -u root --exec /usr/bin/bash -c '/opt/wsl-port-forward.sh'

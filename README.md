@@ -16,7 +16,7 @@ https://github.com/microsoft/WSL/issues/4150#issuecomment-504209723
 
 ## Commands
 
-### netsh interface portproxy show v4tov4
+### Check configuration of portfowarding to wsl2
 
 ```
 netsh interface portproxy show v4tov4
@@ -32,10 +32,32 @@ Address         Port        Address         Port
 0.0.0.0         22          wsl ip address  22
 ```
 
+### Check firewall rules
+
+Execute below command to see if the desired ports are allowed for inbound connections.
+
+```
+netsh advfirewall firewall show rule name=all dir=in | Select-String -Pattern "(LocalPort:\s*22)" -Context 9,4
+
+  Rule Name:                            WSL 2 Firewall Unlock
+  ----------------------------------------------------------------------
+  Enabled:                              Yes
+  Direction:                            In
+  Profiles:                             Domain,Private,Public
+  Grouping:
+  LocalIP:                              Any
+  RemoteIP:                             Any
+  Protocol:                             TCP
+> LocalPort:                            22,80,8769
+  RemotePort:                           Any
+  Edge traversal:                       No
+  Action:                               Allow
+```
+
 ### reset all portproxy
 
 ```
 sudo netsh int portproxy reset all
 ```
-- *sudo is not available by default. Install it using scoop onto Powershell terminal.
 
+- sudo is not available by default. Install it using scoop onto Powershell terminal.
